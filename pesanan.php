@@ -3,15 +3,9 @@
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item active">Pesanan</li>
     </ol>
-    <a href="?page=pesanan_tambah" class="btn btn-primary">+ Tambah Data</a>
-    <hr>
-    <table class="table">
-        <tr>
-            <th>Nama Pelanggan</th>
-            <th>Nama Pesanan</th>
-            <th>Jumlah Pesanan</th>
-            <th>Aksi</th>
-        </tr>
+    <a href="?page=pesanan_tambah" class="btn btn-primary mb-3">+ Tambah Data</a>
+    
+    <div class="row">
         <?php
         // Query dengan JOIN untuk mengambil data dari tabel pesanan, pelanggan, dan menu
         $query = mysqli_query($koneksi, 
@@ -23,17 +17,21 @@
 
         while ($data = mysqli_fetch_array($query)) {
         ?>
-        <tr>
-            <td><?= htmlspecialchars($data['namapelanggan']) ?></td>
-            <td><?= htmlspecialchars($data['namamenu']) ?></td>
-            <td><?= htmlspecialchars($data['jumlah']) ?></td>
-            <td>
-                <a href="?page=pesanan_ubah&id=<?= $data['idpesanan']; ?>" class="btn btn-secondary">Ubah</a>
-                <a href="?page=pesanan_hapus&id=<?= $data['idpesanan']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
-            </td>
-        </tr>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?= htmlspecialchars($data['namapelanggan']); ?></h5>
+                    <p class="card-text">
+                        <strong>Nama Pesanan:</strong> <?= htmlspecialchars($data['namamenu']); ?><br>
+                        <strong>Jumlah Pesanan:</strong> <?= htmlspecialchars($data['jumlah']); ?>
+                    </p>
+                    <a href="?page=pesanan_ubah&id=<?= $data['idpesanan']; ?>" class="btn btn-secondary">Ubah</a>
+                    <a href="?page=pesanan_hapus&id=<?= $data['idpesanan']; ?>" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
+                </div>
+            </div>
+        </div>
         <?php
         }
         ?>
-    </table>
+    </div>
 </div>
